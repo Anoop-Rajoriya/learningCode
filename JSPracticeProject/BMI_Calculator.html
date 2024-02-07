@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI-calculator</title>
+</head>
+<!-- css property  -->
+<style>
+    * {
+        color: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background-color: #112222;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 50px;
+        padding: 20px;
+    }
+
+    body>h2:nth-child(2){
+        position: absolute;
+        top: 4rem;
+        font-size: 1rem;
+        text-transform: capitalize;
+        color: red;
+        /* display: hidden; */
+        visibility: hidden;
+        /* visibility: visible; */
+    }
+
+    body>form {
+        height: 12rem;
+        width: 18rem;
+        border: 2px solid white;
+        border-radius: 20px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background-color: #203e4a;
+    }
+
+    body>div {
+        width: 18rem;
+        border: 2px solid white;
+        padding: 20px;
+        border-radius: 20px;
+        background-color: #203e4a;
+    }
+
+</style>
+
+<body>
+    <h2>BMI Calculator</h2>
+    <h2>enter currect inpute </h2>
+    <form action="">
+        <label for="">Height in meters</label>
+        <input style="outline: none; color: black; font-size: medium;" type="number" name="" id="height">
+        <label for="">weight in kilogram</label>
+        <input style="outline: none; color: black; font-size: medium;" type="number" name="" id="weight">
+
+        <button
+            style="border: 2px solid white; background-color: inherit; padding: 3px 6px; border-radius: 4px; margin-top: 2rem; font-size: medium;">Calculate
+        </button>
+    </form>
+
+    <div>
+        <h3>
+            Under weight : 0 to 18
+        </h3>
+        <h3>
+            Healthy Weight : 18 to 25
+        </h3>
+        <h3>
+            Over weight : 25 to 30
+        </h3>
+    </div>
+</body>
+<!-- javascript  -->
+<script>
+
+    const calculateButton = document.querySelector('body>form>button');
+    const bmiDisplay = document.querySelectorAll('body>div>h3');
+
+    console.table(calculateButton);
+
+    function calculate() {
+
+        const height = Number(document.querySelector('#height').value);
+        const weight = Number(document.querySelector('#weight').value);
+        let BMI;
+
+        bmiDisplay.forEach(e=>{
+            e.style.backgroundColor = "#203e4a"
+        })
+        document.querySelector("body>h2:nth-child(2)").style.visibility = "hidden";
+
+        if (height > 0.5 && height < 2.5 && weight > 20 && weight < 150) {
+            BMI = weight / (height * height);
+            console.log(BMI);
+
+            if (BMI < 18) {
+                console.log("under weight");
+                bmiDisplay[0].style.backgroundColor = "green"
+            }
+            else if (BMI > 25) {
+                console.log("Over weight");
+                bmiDisplay[2].style.backgroundColor = "green"
+                
+            } else {
+                console.log("Healthy weight");
+                bmiDisplay[1].style.backgroundColor = "green"
+
+            }
+        }
+        else {
+            console.log("please enter the right input");
+            console.log(document.querySelector("body>h2:nth-child(2)"))
+            document.querySelector("body>h2:nth-child(2)").style.visibility = "visible"
+        }
+    }
+
+
+    calculateButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        calculate()
+    })
+
+
+</script>
+
+</html>

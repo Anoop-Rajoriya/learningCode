@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background-changer</title>
+</head>
+<!-- css properties -->
+<style>
+    *{
+        background-color: rgb(49, 48, 48);
+        color: white;
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        height: 100vh;
+        width: 100vw;
+        text-align: center;
+    }
+    body>div{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 0px 10px 0px;
+        background-color: inherit;
+    }
+    body>div>span{
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+        border: 2px solid white;
+    }
+    body>h2{
+        background-color: inherit;
+    }
+</style>
+
+<body>
+    <h2>Background changer</h2>
+    <div>
+        <span id="#007a7a" style="background-color: #007a7a;"></span>
+        <span id="#004040" style="background-color: #004040;"></span>
+        <span id="#000000" style="background-color: #000000;"></span>
+        <span id="#3d0000" style="background-color: #3d0000;"></span>
+        <span id="#7a0000" style="background-color: #7a0000;"></span>
+    </div>
+    <h2>
+        click on any box to change background color
+    </h2>
+</body>
+
+<!-- javascript -->
+<script>
+    const body = document.querySelector('body');
+    const colorBox = document.querySelectorAll('body>div>span');
+    // console.log(body, colorBox);
+    colorBox.forEach(
+        elm=> {
+            elm.addEventListener("click", (elm)=>{
+                console.log(elm.target.id);
+                body.style.backgroundColor = `${elm.target.id}`
+            })
+        }
+    )
+</script>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>digital clock</title>
+</head>
+
+<style>
+    * {
+        color: #0b3c5d;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background-color: #235789;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 25px;
+        padding: 50px 0px;
+    }
+
+    body>h2 {
+        color: #ffcb05;
+        text-transform: uppercase;
+        font-size: 3rem;
+    }
+
+    body>div {
+        background-color: #ffcb05;
+        height: 50vh;
+        width: 95vw;
+        border: 2px solid #0b3c5d;
+        border-top-right-radius: 5rem;
+        border-bottom-left-radius: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    body>div>div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 8px solid #235789;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    body>div>div>h4 {
+        color: #0b3c5d;
+        font-size: 2rem;
+        font-weight: 900;
+    }
+
+    body>div>div>span {
+        display: inline-block;
+        height: 10rem;
+        width: 8rem;
+        background-color: aliceblue;
+        border: 2px solid #235789;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+    <h2>
+        digital clock
+    </h2>
+    <div>
+        <div>
+            <span>00</span>
+            <h4>Minutes</h4>
+        </div>
+        <div>
+            <span>00</span>
+            <h4>Seconds</h4>
+        </div>
+    </div>
+</body>
+<script>
+    let seconds = 0;
+    let Minutes = 0;
+
+
+    setInterval(() => {
+
+        if (seconds > 59) {
+            seconds = 0;
+            Minutes++;
+
+            if (Minutes > 99) {
+                Minutes = 0;
+            }
+
+            if (Minutes < 10) {
+                document.querySelector("body>div>div:nth-child(1)>span").textContent = `0${Minutes}`;
+            } else {
+                document.querySelector("body>div>div:nth-child(1)>span").textContent = Minutes;
+            }
+        }
+
+        if (seconds < 10) {
+
+            document.querySelector('body>div>div:nth-child(2)>span').textContent = `0${seconds}`;
+        } else {
+
+            document.querySelector('body>div>div:nth-child(2)>span').textContent = seconds;
+        }
+        console.log(seconds);
+        seconds++
+
+    }, 1000)
+
+
+
+</script>
+
+</html>

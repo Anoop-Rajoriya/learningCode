@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guse the Number</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: #27005D;
+    }
+
+    body>h1 {
+        text-transform: uppercase;
+        font-size: 3.5vh;
+        font-weight: 900;
+        color: #AED2FF;
+    }
+
+    body>div {
+        width: 80vw;
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        flex-direction: column;
+        gap: 1rem;
+        background-color: #9400FF;
+        padding: 20px 0px;
+    }
+
+    body>div>form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        border-radius: 15px;
+        /* border: 2px solid #F6FA70; */
+        padding: 20px 40px;
+        margin: .8rem 0rem;
+        background-color: #27005D;
+    }
+
+    body>div>form>input {
+        font-size: 1.8rem;
+        width: 12rem;
+        outline: none;
+        background-color: #27005D;
+        color: #AED2FF;
+        border: 1px solid #AED2FF;
+        text-align: center;
+    }
+
+    body>div>form>button {
+        padding: 15px 30px;
+        border-radius: 1rem;
+        border: 2px solid #AED2FF;
+        text-transform: uppercase;
+        font-size: large;
+        background-color: #27005D;
+        color: #AED2FF;
+    }
+
+    body>div>form>button:active {
+        background-color: #AED2FF;
+        color: #27005D;
+    }
+
+    body>div>h5 {
+        width: 80%;
+        text-align: center;
+        text-transform: capitalize;
+        font-size: large;
+        color: #AED2FF;
+    }
+</style>
+
+<body>
+    <h1>guess the Number Game</h1>
+    <div>
+        <h5>
+            Guess a number, entered it and press guessed number butten.
+        </h5>
+        <h5>
+            you have 10 chance to win the game.
+        </h5>
+        <form action="">
+            <input type="text" id="inp" style="">
+            <button id="btn">guessed Number</button>
+        </form>
+        <h5>
+            guessed number range is 1 to 100.
+        </h5>
+        <h5></h5>
+    </div>
+</body>
+<script>
+
+    const input = document.querySelector('#inp');
+    const butten = document.querySelector('#btn');
+    const chanceElm = document.querySelector('body>div>h5:nth-child(2)');
+    const guessedRange = document.querySelector('body>div>h5:nth-child(4)');
+    const warning = document.querySelector('body>div>h5:nth-child(5)')
+    let chance = 10;
+    let number = Math.round(Math.random() * 100 + 1);
+    let lowerLimit = 1;
+    let upperLimit = 100;
+
+    butten.addEventListener('click', e => {
+        e.preventDefault();
+
+        checkGameValidation();
+    });
+
+    function checkGameValidation() {
+        const guess = Number(input.value);
+        if (guess > 0 && guess <= 100) {
+            warning.textContent = "";
+
+            if (chance == 1) {
+                chance--;
+                input.style.visibility = "hidden";
+                guessedRange.style.visibility = "hidden";
+                butten.textContent = "start game";
+                chanceElm.textContent = "Game over";
+
+            } else if (chance > 1) {
+                chance--;
+                chanceElm.textContent = `you have ${chance} chance to win the game.`;
+
+                checkGuess(guess);
+            } else {
+                GameReset();
+            }
+
+        } else {
+            warning.textContent = "please enterd valid inpute."
+        }
+    }
+
+    function checkGuess(guess) {
+        console.log(number);
+        if (guess == number) {
+            console.log("you won");
+            warning.textContent = "congrates you won.";
+            setTimeout(() => (warning.textContent = ""), 1500);
+            GameReset();
+        } else {
+            console.log("not match");
+            if (guess > number) {
+                console.log("number is less then your number.");
+                upperLimit = guess;
+                warning.textContent = "number is lesser for guessed number.";
+            } else {
+                console.log("number is great then your number.");
+                lowerLimit = guess;
+                warning.textContent = "number is greater for guessed number.";
+            }
+            console.log(`number range is ${lowerLimit} to ${upperLimit}`);
+            guessedRange.textContent = `
+guessed number range is ${lowerLimit} to ${upperLimit}. `
+        }
+    }
+
+    function GameReset() {
+        chance = 10;
+        input.style.visibility = "visible";
+        guessedRange.style.visibility = "visible";
+        butten.textContent = "guessed Number";
+        chanceElm.textContent = `you have ${chance} chance to win the game.`;
+        input.value = "";
+        number = Math.round(Math.random() * 100 + 1);
+        lowerLimit = 1;
+        upperLimit = 100;
+        guessedRange.textContent = `
+guessed number range is ${lowerLimit} to ${upperLimit}. `
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Checker</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    #keyboardChecker {
+        text-align: center;
+        font-size: 24px;
+    }
+
+    #result {
+        color: blue;
+    }
+</style>
+
+<body>
+    <div id="keyboardChecker">
+        Press a key to see the result: <span id="result"></span>
+    </div>
+</body>
+
+<script>
+// document.addEventListener('keydown', function(event) {
+//     // Get the key that was pressed
+//     const keyPressed = event.key;
+
+//     // Display the pressed key in the result span
+//     document.getElementById('result').textContent = keyPressed;
+// });
+
+document.addEventListener("keydown", e=>{
+    const keyPressed = e.key;
+
+    document.querySelector('#result').textContent = keyPressed;
+})
+
+</script>
+
+</html>

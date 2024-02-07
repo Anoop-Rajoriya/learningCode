@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlimited color</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+    }
+
+    body>div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    body>div>h1 {
+        font-size: 4vw;
+        text-transform: uppercase;
+    }
+
+    body>div>div>button {
+        padding: 2vw;
+        font-size: 3vw;
+        text-transform: uppercase;
+        outline: none;
+        border: 4px solid black;
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+    <div>
+        <h1>Unlimited color changer</h1>
+        <h1>Click bellow button to start</h1>
+        <div>
+            <button>
+                click to start
+             </button>
+     
+             <button>
+                 click to stop
+             </button>
+        </div>
+    </div>
+</body>
+<script>
+    const string = "123467890abcdefghijklmnopqrstuvwxyz";
+    const button = document.querySelectorAll('body>div>div>button');
+    const body = document.querySelector('body');
+    let intervalRef ;
+    const randomHexColorCode01 = () => {
+        const string = "123456abcdefABCDEF";
+        let random = "";
+        for(let i=0; i<6; i++)
+        {
+            random += string[Math.floor(Math.random() * string.length)];
+        }
+
+            return '#'+random;
+    }
+
+    button[0].addEventListener('click', e => {
+
+       intervalRef = setInterval(() => {
+            console.log("start", randomHexColorCode01());
+            body.style.backgroundColor = String(randomHexColorCode01())
+            button[0].style.backgroundColor = String(randomHexColorCode01())
+            button[1].style.backgroundColor = String(randomHexColorCode01())
+        }, 1000)
+    })
+    button[1].addEventListener('click', e => {
+        console.log("start", randomHexColorCode01());
+        clearInterval(intervalRef);
+    })
+
+
+</script>
+
+</html>
