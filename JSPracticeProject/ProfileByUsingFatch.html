@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>github profile</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: rgb(48, 46, 46);
+        color: #ffff;
+    }
+
+    body>h1 {
+        text-transform: uppercase;
+        font-size: 5vw;
+    }
+
+    body>div {
+        border: 2px solid #ffff;
+        padding: 10px;
+        height: 60vh;
+        width: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #first {
+        height: 33%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #first img {
+        border: 2px solid white;
+        display: block;
+        height: 15vh;
+        width: 15vh;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #first div>h2 {
+        text-transform: capitalize;
+        font-size: 2.5vh;
+    }
+
+    #second {
+        height: 33%;
+        padding: 0px 10px;
+        border-top: 2px solid #ffff;
+        border-bottom: 2px solid #ffff;
+    }
+
+    #second p {
+        text-transform: capitalize;
+        font-size: 2vh;
+    }
+
+    #thired {
+        height: 33%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    #thired a {
+        border: 2px solid #ffff;
+        height: 10vh;
+        width: 10vh;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+    }
+</style>
+
+<body>
+    <h1>github profile</h1>
+    <div>
+        <div id="first">
+            <img src="" alt="img">
+            <div>
+                <h2>user name</h2>
+                <h2>full name</h2>
+            </div>
+        </div>
+        <div id="second">
+            <p>
+                bio
+            </p>
+            <p>
+                location
+            </p>
+            <p>
+                created at
+            </p>
+        </div>
+        <div id="thired">
+            <a href="">github</a>
+            <a href="">api call</a>
+        </div>
+    </div>
+</body>
+<script>
+    const profileCad = document.querySelector("body>div");
+    const img = profileCad.firstElementChild.firstElementChild;
+    const username = profileCad.firstElementChild.lastElementChild.firstElementChild;
+    const name = profileCad.firstElementChild.lastElementChild.lastElementChild;
+    const bio = profileCad.children.second.children[0];
+    const loc = profileCad.children.second.children[1]
+    const createdAt = profileCad.children.second.children[2]
+    const github = profileCad.children.thired.children[0]
+    const repos = profileCad.children.thired.children[1]
+
+    // console.log(img, username, name, bio, loc, createdAt, github, repos);
+
+    const url = "https://api.github.com/users/Anoop-Rajoriya";
+
+    let fetchRequest = fetch(url);
+
+    // by using .then and .catch
+    fetchRequest
+    .then(res=> res.json())
+    .then(data=>{
+        console.log(data);
+        img.src = data.avatar_url;
+        username.textContent = data.login;
+        name.textContent = data.name;
+        bio.textContent = data.bio;
+        loc.textContent = data.location;
+        createdAt.textContent = data.created_at;
+        github.href = data.html_url;
+        repos.href = data.repos_url;
+    })
+
+    // by using async await
+    // (async () => {
+    //     const responce = await fetch(url);
+    //     const data = await responce.json();
+
+    //     img.src = data.avatar_url;
+    //     username.textContent = data.login;
+    //     name.textContent = data.name;
+    //     bio.textContent = data.bio;
+    //     loc.textContent = data.location;
+    //     createdAt.textContent = data.created_at;
+    //     github.href = data.html_url;
+    //     repos.href = data.repos_url;
+    // })()
+
+
+</script>
+
+</html>
