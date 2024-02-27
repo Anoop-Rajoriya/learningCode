@@ -1,2 +1,2 @@
 # Learning code
-[Setup guidance](./Readme.md#setup-guidance)
+[Setup guidance](JSPracticeProject/BMI_Calculator.html)
